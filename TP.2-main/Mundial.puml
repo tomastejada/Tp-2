@@ -1,0 +1,64 @@
+@startuml
+class torneo.Llave {
+- String nombre
++ <<Create>> Llave(String)
++ ArrayList<Equipo> getEquipoQueAvanza()
+}
+abstract class torneo.EtapaMundial {
+- String descripcionEtapa
+- ArrayList<Partido> partidos
+- ArrayList<Equipo> equipoQueAvanza
++ <<Create>> EtapaMundial()
++ String getDescripcionEtapa()
++ void setDescripcionEtapa(String)
+# ArrayList<Partido> getPartidos()
++ ArrayList<Equipo> getEquipoQueAvanza()
++ void addPartido(Partido)
++ void addEquipoQueAvanza(Equipo)
++ String toString()
+}
+class torneo.Partido {
+- Date fecha
+- Equipo local
+- Equipo visitante
+- Resultado resultado
++ <<Create>> Partido(Date,Equipo,Equipo)
++ Equipo getLocal()
++ Equipo getVisitante()
++ Resultado getResultado()
++ void setResultado(Resultado)
++ String toString()
+}
+class torneo.Resultado {
+- int golesLocal
+- int golesVisitante
++ <<Create>> Resultado(int,int)
++ int getGolesLocal()
++ int getGolesVisitante()
++ boolean ganoLocal()
++ boolean empate()
++ String toString()
+}
+class torneo.Equipo {
+- String nombre
+- ArrayList<Partido> partidosJugados
+- int puntajeEtapaGrupos
++ <<Create>> Equipo(String)
++ <<Create>> Equipo(String,ArrayList<Partido>)
++ String getNombre()
++ void setNombre(String)
++ int getPuntajeEtapaGrupos()
++ void setPuntajeEtapaGrupos(int)
++ void addPartidosJugados(Partido)
++ void partidoGanado()
++ void partidoEmpatado()
++ String toString()
+}
+class torneo.Grupo {
++ ArrayList<Equipo> getEquipoQueAvanza()
+}
+
+
+torneo.EtapaMundial <|-- torneo.Llave
+torneo.EtapaMundial <|-- torneo.Grupo
+@enduml
